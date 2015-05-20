@@ -1,2 +1,0 @@
-Remove this file from the git repo and push your change
-back to the github remote.
