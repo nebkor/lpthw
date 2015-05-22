@@ -12,7 +12,7 @@ teeth = 'White'
 hair = 'Brown'
 
 print "Let's talk about %s." % name
-print "He's %d cm tall." % (height * INCH2CM)
+print "He's %#x cm tall." % (height * INCH2CM) # "0x" hexidecimal format char
 print "He's %d kg heavy." % (weight * LB2KG)
 print "Actually that's not too heavy."
 print "He's got %s eyes and %s hair." % (eyes, hair)
