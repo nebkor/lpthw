@@ -1,7 +1,6 @@
 # prints "Mary had a little lamb."
 print "Mary had a little lamb."
 # prints "Its fleece was white as %s" with the variable snow
-# and incorrect grammar
 print "Its fleece was white as %s" % 'snow'
 # prints "And everywhere that Mary went."
 print "And everywhere that Mary went."
