@@ -9,5 +9,5 @@ print
 
 print "If you gained weight at a constant rate, you",
 print "would have had to have gained"
-print "%d mass-units per year " % (weight/age),
+print "%f mass-units per year " % (weight/age),
 print "to have achieved your current stature."
