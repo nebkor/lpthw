@@ -15,7 +15,8 @@ language_fake_bool = raw_input("Do you still speak %s? " % birth_language)
 	
 if language_fake_bool == 'yes' or 'YES' or 'Yes':
 	current_lang = ' and you still speak the native language.'
-else current_lang = ', but you no longer speak the native language.'
+elif language_fake_bool == 'no' or 'NO' or 'No':
+	current_lang = ', but you no longer speak the native language.'
 
 print "Wow! You were born in %s, which is located in the country of %s. In %s, they speak %s" % (
 	birth_city, birth_country, birth_city, birth_language) + current_lang
