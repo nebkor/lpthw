@@ -21,6 +21,10 @@ print "Here's your file %r:" % filename
 # method of object referenced by the variable 'txt'.
 print txt.read()
 
+# close the file handle referenced by the variable 'txt'
+# by calling the "close()" method. calling "read()" on
+# txt after it's been closed would be an error.
+txt.close()
 
 # prints the string "Type the filename again:"
 print "Type the filename again:"
@@ -37,3 +41,5 @@ file_again = raw_input("> ")
 txt_again = open(file_again)
 
 print txt_again.read()
+
+txt_again.close()
