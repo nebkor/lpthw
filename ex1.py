@@ -15,6 +15,9 @@ print "Oh my god this will totally help in the long run."
 phrases = {'1': 'Hello World!','2': 'Hello Again','3': 'I like typing this.','4': 'This is fun.',
 		'5': 'Yay! Printing.','6': 'I\'d much rather you \'not\'.', '7': 'I "said" do not touch this.',
 		'8': 'Oh my god this will totally help me in the long run',}
-# printing all phrases 
+
 for k, v in phrases.iteritems():
-	print "%s: %s" % (k, v)
+	print "%s: %s" % (k, v) 
+
+for i in sorted(phrases.keys()):
+	print "%s: %s" % (i, phrases[i])
