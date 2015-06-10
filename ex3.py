@@ -42,5 +42,5 @@ pizza_cir = 3.14 * pizza_diameter_int
 # prints "If your pizza is" then the value of pizza_diameter followed by
 # "inches diagonaly, then the pizza is" then the value of pizza_cir followed by
 # "inches around!"
-print "If your pizza is %s inches diagonaly, then the pizza is %s around!" % (
+print "If your pizza is %s inches diagonaly, then the pizza is %s inches around!" % (
 	pizza_diameter, pizza_cir)
