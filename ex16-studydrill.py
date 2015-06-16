@@ -13,9 +13,8 @@ print "Here are the file(s) you'd like to read:\n"
 # moving to the next entry in the list
 for i in files_to_be_read:
 	print "%s:\n" % i
-	f = open(i, 'r')
-	print f.read()
+	print open(i, 'r').read()
 	print
-	f.close()
+
 
 print "This is the end of this script" 
