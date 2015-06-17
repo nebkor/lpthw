@@ -9,6 +9,7 @@ def rewind(f):
     f.seek(0)
 
 def print_a_line(f):
+    # see http://xahlee.info/perl-python/stateful_func.html
     print print_a_line.linecount,
     print f.readline(),
     print_a_line.linecount += 1
