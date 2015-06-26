@@ -3,10 +3,10 @@ cats = 30
 dogs = 15
 
 
-if people < cats:
+if people < cats and cats > dogs:
 	print "Too many cats! The world is doomed!"
 
-if people > cats:
+if people > cats or dogs + people > cats:
 	print "Not many cats! The world is saved!"
 
 if people < dogs:
