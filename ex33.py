@@ -5,11 +5,13 @@ def i_count(a, b):
 	while b > a:
 		print "a is currently:", a
 		numbers.append(a)
-		if not a > b:
-			a += 1
-			print "now a is:", a
-		else:
-			pass
+		a = range(a, b)
+		print "now a is:", a
+	else:
+		print "The numbers: "
+		numbers.sort()
+		for num in numbers:
+			print num
 
 i_count(0, 56)
 
@@ -22,7 +24,7 @@ i_count(0, 56)
 #	print "Numbers now: ", numbers
 #	print "At the botom i is %d" % i
 
-print "The numbers: "
-numbers.sort()
-for num in numbers:
-	print num,
+#print "The numbers: "
+#numbers.sort()
+#for num in numbers:
+#	print num,
