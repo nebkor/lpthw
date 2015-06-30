@@ -15,15 +15,18 @@ for fruit in fruits:
 for i in change:
 	print "I got %r" % i
 
-# we can also build lists, first start with an empty one
-elements = []
-
-# then use the range function to do 0 to 5 counts
-for i in range(0, 6):
-	print "Adding %d to the list." % i
-	# append is a function (method) that lists understand
-	elements.append(i)
+# creating a list of integers 0 - 5, held by elements
+elements = range(0, 6)
 
 # now we can print them out too
 for i in elements:
 	print "Element was: %d" % i
+
+# reverse a list and print
+def reverse_list_print(l):
+	print "Now, backwards!"
+	l.reverse()
+	for i in l:
+		print i
+
+print reverse_list_print(elements)
