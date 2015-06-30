@@ -24,6 +24,7 @@ for i in elements:
 
 # reverse a list and print
 def reverse_list_print(l):
+	# try: didn't work here, unindent error. Maybe we need a else:?
 	print "Now, backwards!"
 	l.reverse()
 	for i in l:
