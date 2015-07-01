@@ -1,10 +1,13 @@
 from sys import exit
+import re
+
+NUMBERS = re.compile('([0-9]+)$')
 
 def gold_room():
     print "This room is full of gold.  How much do you take?"
 
     choice = raw_input("> ")
-    if "0" in choice or "1" in choice:
+    if NUMBERS.match(choice):
         how_much = int(choice)
     else:
         dead("Man, learn to type a number.")
@@ -61,9 +64,11 @@ def dead(why):
 def start():
     print "You are in a dark room."
     print "There is a door to your right and left."
+    print "There is music playing."
     print "Which one do you take?"
 
     choice = raw_input("> ")
+
 
     if choice == "left":
         bear_room()
