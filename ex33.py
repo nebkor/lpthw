@@ -12,6 +12,8 @@ def i_count(x, inc=1):
         # use the value of whatever this is. It's just a syntactic place-
         # holder."
         for _ in range(x):
+                if not i < x:
+                        break 
                 print "At the top i is %d" % i
 		numbers.append(i)
 
