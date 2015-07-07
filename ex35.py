@@ -6,9 +6,11 @@ def gold_room():
 
     choice = raw_input("> ")
     try:
-        if re.match('[0-9]', choice) and int(choice) < 50:
+        goldnum = int(choice)
+        if goldnum < 50:
             dead("Nice, you're not greedy, you win!")
-        elif int(choice) >= 50:
+        # else if goldnum is *not* less than 50..
+        elif not (goldnum < 50):
             dead("You greedy bastard!")
     except ValueError:
         print "Man, learn how to type a number!"
@@ -63,49 +65,49 @@ def cthulu_room():
         cthulu_room()
 
 
-tries = 0 # how to get this into the function and used in the nested functions?
-          # maybe not possible? blech
 def cthulus_mind():
+    tries = 0
 
-    if tries == 0:   
-        print "Your vision begins to blur and goes dark."
-        print "You hear in the distance a familiar bellow:"
-        print "Mortal... completing this task will prove your sanity in the face of a god..."
-        print "ENTERRRRRRRRRRRR"
-        cthulu_mind_test()
-    elif 1 <= tries <= 10:
-        print "You may try again. Beware, these are not unlimited..."
-        print 10 - tries
-        cthulu_mind_test()
-    else:
-        print "You go insane and begin to flee!"
-        start()
+    while tries < 11:
+        if tries == 0:
+            print "Your vision begins to blur and goes dark."
+            print "You hear in the distance a familiar bellow:"
+            print "Mortal... completing this task will prove your sanity in the face of a god..."
+            print "ENTERRRRRRRRRRRR"
+            cthulu_mind_test()
+            tries += 1
+        elif 0 < tries < 10:
+            print "You may try again. Beware, these are not unlimited..."
+            print 10 - tries
+            cthulu_mind_test()
+            tries += 1
+        else:
+            print "You go insane and begin to flee!"
+            start()
+    return
 
-def cthulu_mind_test(): # this really should be its own function - complete
+
+def cthulu_mind_test():
     print "Suddenly arcane rune symbols enter your field of vision"
     print "You recognize them! Arithmitic..."
     print "You then hear a deep echo:"
     print "What is EIGHT to the power of TWO?!!"
-    choice = int(raw_input("> "))
 
     try:
+        choice = int(raw_input("> "))
         if choice == 64:
             print "Ahhh, the force is strong with you..."
             gold_room()
-#            dead("good work, richard. Lets finish more of this later")
-#                cthulu_mind_test2()
         else:
             print "AH HA! You are no match for the INSANITY!"
             print
             print
-            global tries
-            tries += 1
-            cthulus_mind()
     except ValueError:
         print "You're uttering gibberish, a sign of INSANITY!"
         print
         print
-        cthulu_mind_test()
+
+    return
 
 def dead(why):
     print why, "Good Job!"
@@ -127,4 +129,3 @@ def start():
 
 
 start()
-
