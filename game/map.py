@@ -1,11 +1,8 @@
 from sys import exit
 import re
-import 
-
-import 
 
 
-# create gold_room
+# define gold_room()
 def gold_room():
     '''
     This is the gold room. Player chooses amount of gold,
@@ -20,9 +17,9 @@ def gold_room():
     '''
     print "This room is full of gold. How much do you take?"
 
-    choice = raw_input("> ")
+    choice = raw_input("> ") 
     try:
-        if re.match('[0-9]', choice) and int(choice) < 50:
+        if re.match('[0-9]', choice) and int(choice) < 50: 
             dead("Nice, you're not greedy, you win!")
         elif int(choice) >= 50:
             dead("You greedy bastard!")
@@ -34,6 +31,8 @@ def gold_room():
 
 
 def bear_room():
+    '''
+    '''
     print "There is a bear here."
     print "The bear has a bunch of honey."
     print "The fat bear is in front of another door."
@@ -62,40 +61,56 @@ def cthulu_room():
     print "He, it, whatever stares at you and you go insane."
     print "Do you flee for your life or eat your head? Or maybe something more brave?"
 
+    tries = 0
     choice = raw_input("> ")
 
     if "flee" in choice:
         start()
     elif "head" in choice:
         dead("Well that was tasty.")
-    elif "brave" in choice:
+    elif "brave" or "fight" in choice:
         print "You decide to fight the insanity. Cthulu values your bravery."
         print 'Cthulu bellows, "Mortal... Why have you decided to fight?"'
         bellows = ['Resistance', 'Is', 'Fuetile']
         for i in bellows:
             print "%s..." % i
-        cthulus_mind()
+        while tries < 11:
+            if tries == 0:   
+                print "Your vision begins to blur and goes dark."
+                print "You hear in the distance a familiar bellow:"
+                print "Mortal... completing this task will prove your sanity in the face of a god..."
+                print "ENTERRRRRRRRRRRR"
+                cthulu_mind_test()
+                tries =+ 1
+            elif 1 <= tries <= 10:
+                print "You may try again. Beware, these are not unlimited..."
+                print 10 - tries, "tries left"
+                cthulu_mind_test()
+                tries =+ 1
+            else:
+                print 
+                dead("You go insane and flee into the deepest depths of your mind!")
     else:
         cthulu_room()
 
 
-tries = 0 # how to get this into the function and used in the nested functions?
+#tries = 0 # how to get this into the function and used in the nested functions?
           # maybe not possible? blech
-def cthulus_mind():
+# def cthulus_mind():
 
-    if tries == 0:   
-        print "Your vision begins to blur and goes dark."
-        print "You hear in the distance a familiar bellow:"
-        print "Mortal... completing this task will prove your sanity in the face of a god..."
-        print "ENTERRRRRRRRRRRR"
-        cthulu_mind_test()
-    elif 1 <= tries <= 10:
-        print "You may try again. Beware, these are not unlimited..."
-        print 10 - tries
-        cthulu_mind_test()
-    else:
-        print "You go insane and begin to flee!"
-        start()
+#     if tries == 0:   
+#         print "Your vision begins to blur and goes dark."
+#         print "You hear in the distance a familiar bellow:"
+#         print "Mortal... completing this task will prove your sanity in the face of a god..."
+#         print "ENTERRRRRRRRRRRR"
+#         cthulu_mind_test()
+#     elif 1 <= tries <= 10:
+#         print "You may try again. Beware, these are not unlimited..."
+#         print 10 - tries
+#         cthulu_mind_test()
+#     else:
+#         print "You go insane and begin to flee!"
+#         start()
 
 def cthulu_mind_test(): # this really should be its own function - complete
     print "Suddenly arcane rune symbols enter your field of vision"
@@ -113,14 +128,14 @@ def cthulu_mind_test(): # this really should be its own function - complete
             print "AH HA! You are no match for the INSANITY!"
             print
             print
-            global tries
-            tries += 1
-            cthulus_mind()
+            cthulu_room()
     except ValueError:
         print "You're uttering gibberish, a sign of INSANITY!"
         print
         print
         cthulu_mind_test()
+
+    return
 
 def dead(why):
     print why, "Good Job!"
@@ -139,6 +154,29 @@ def start():
         cthulu_room()
     else:
         dead("You stumble around the room until you starve.")
+
+
+def gargoyle_room():
+    print "You enter the room and see three gargoyles staring back at you.."
+    print "You see that each gargyole is inscribed with a symbol on it's base"
+    print "They read, 'Omnia', 'Amor', 'Vincit'"
+    print "A button below each gargoyle appears to be present." 
+    pass
+
+
+
+def heart_room():
+    pass
+
+def swamp_room():
+    pass
+
+def monkey_room():
+    pass
+
+def pit_room():
+    pass
+
 
 
 
