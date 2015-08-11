@@ -174,8 +174,48 @@ def swamp_room():
 def monkey_room():
     pass
 
-def pit_room():
-    pass
+def pit_room(): 
+    print "As you enter, the door reads 'Pit of Dispair'."
+    print "The door swiftly closes behind you. It appears you are trapped"
+    print "Looking up, you see two platforms to your left and right."
+    print """
+    Protruding from the walls you see that there is a way up.
+    Rocks embedded in the walls, vines, and small gaps where other unsuccessful
+    adventurers have attempted to escape are all visible.
+    """
+
+    # Define switches at top of pit
+    left_switch = False
+    right_switch = False
+
+    #  Turns out the Timer() function isn't very useful for a game.
+    # def platform_crumble():
+    #     exit("The platform crumbles beneath you and you fall to your death.")
+
+    # define platform crash function so I don't have to write out the code twice.
+    def platform_crash():
+
+
+# loop until left_switch and right_switch are True
+    while left_switch or right_switch = False:
+        choice = raw_input("> ")
+        # create mechanism to activate switch
+        if "climb" and "left" in choice:
+            print "You scale the wall to your left, reaching the platform."
+            print "It doesn't seem very sturdy"
+            print "You see a switch in the wall! Do you activate it?"
+            activate_switch = raw_input("> ")
+            if "activate" or "push" or "press" in activate_switch:
+                crash = 0
+                while crash < 16:
+                    print "The platfrom begins to shake under you"
+
+
+
+
+
+
+
 
 
 
