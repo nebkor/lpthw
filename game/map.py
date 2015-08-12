@@ -1,4 +1,5 @@
 from sys import exit
+from time import sleep
 import re
 
 
@@ -163,7 +164,9 @@ def gargoyle_room():
     print "A button below each gargoyle appears to be present." 
     pass
 
-
+def get_input():
+    answer = raw_input("> ")
+    return answer
 
 def heart_room():
     pass
@@ -194,6 +197,15 @@ def pit_room():
 
     # define platform crash function so I don't have to write out the code twice.
     def platform_crash():
+        crash = 0
+        print "The platfrom begins to shake under you"
+        while crash < 16:
+            sleep(1)
+            if crash % 5 == 0:
+                print "Oh no! only %d seconds left!" % crash
+            else:
+                crash =+ 1
+
 
 
 # loop until left_switch and right_switch are True
@@ -206,9 +218,12 @@ def pit_room():
             print "You see a switch in the wall! Do you activate it?"
             activate_switch = raw_input("> ")
             if "activate" or "push" or "press" in activate_switch:
-                crash = 0
-                while crash < 16:
-                    print "The platfrom begins to shake under you"
+                Thread(target = get_input).start()
+                Thread(target = platform_crash).start()
+
+
+                    
+
 
 
 
