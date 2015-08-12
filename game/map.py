@@ -1,5 +1,4 @@
 from sys import exit
-from time import sleep
 import re
 
 
@@ -34,27 +33,44 @@ def gold_room():
 def bear_room():
     '''
     '''
-    print "There is a bear here."
-    print "The bear has a bunch of honey."
-    print "The fat bear is in front of another door."
-    print "How are you going to move the bear?"
+    instructions = """There is a bear here.
+    The bear has a bunch of honey."
+    The fat bear is in front of another door to the south."
+    How are you going to move the bear?
+    """
+    print instructions
+
     bear_moved = False
 
-    while True:
+    while not bear_moved:
         choice = raw_input("> ")
 
         if choice == "take honey":
             dead("The bear looks at you then slaps your face off.")
-        elif choice == "taunt bear" and not bear_moved:
-            print "The bear has moved from the door. You can go through it now"
+        elif choice == "instructions":
+            print instructions
+        elif choice == "taunt bear":
+            print "The bear has moved from the south door. You can go through it now"
             bear_moved = True
-        elif choice == "taunt bear" and bear_moved:
-            dead("The bear gets pissed off and chews your leg off.")
-        elif choice == "open door" and bear_moved:
-            gold_room()
+        elif "east" in choice:
+            start()
         else:
             print "I have no idea what that means."
 
+    # Now the bear is moved
+    while True:
+        choice = raw_input("> ")
+
+        if choice == "taunt bear":
+            dead("The bear gets pissed off and chews your leg off.")
+        elif "south" in choice: 
+            heart_room()
+        elif "east" in choice:
+            start()
+        elif "instructions" in choice:
+            print "The bear has moved from the south door. You can go through it now"
+        else:
+            print "I have no idea what that means."
 
 
 def cthulu_room():
@@ -94,25 +110,6 @@ def cthulu_room():
     else:
         cthulu_room()
 
-
-#tries = 0 # how to get this into the function and used in the nested functions?
-          # maybe not possible? blech
-# def cthulus_mind():
-
-#     if tries == 0:   
-#         print "Your vision begins to blur and goes dark."
-#         print "You hear in the distance a familiar bellow:"
-#         print "Mortal... completing this task will prove your sanity in the face of a god..."
-#         print "ENTERRRRRRRRRRRR"
-#         cthulu_mind_test()
-#     elif 1 <= tries <= 10:
-#         print "You may try again. Beware, these are not unlimited..."
-#         print 10 - tries
-#         cthulu_mind_test()
-#     else:
-#         print "You go insane and begin to flee!"
-#         start()
-
 def cthulu_mind_test(): # this really should be its own function - complete
     print "Suddenly arcane rune symbols enter your field of vision"
     print "You recognize them! Arithmitic..."
@@ -144,14 +141,14 @@ def dead(why):
 
 def start():
     print "You are in a dark room."
-    print "There is a door to your right and left."
+    print "There is a door to your east and west."
     print "Which one do you take?"
 
     choice = raw_input("> ")
 
-    if choice == "left":
+    if choice == "west":
         bear_room()
-    if choice == "right":
+    if choice == "east":
         cthulu_room()
     else:
         dead("You stumble around the room until you starve.")
@@ -164,62 +161,90 @@ def gargoyle_room():
     print "A button below each gargoyle appears to be present." 
     pass
 
-def get_input():
-    answer = raw_input("> ")
-    return answer
 
 def heart_room():
-    pass
+    instructions = """
+    This is the Heart Room.
+    There is a door to the North and a door to the East.
+    """
+    print instructions
+
+    while True:
+        choice = raw_input("> ").lower()
+        if "north" in choice:
+            bear_room()
+        elif "east" in choice:
+            swamp_room()
+        elif "instructions" in choice:
+            print instructions
+        else:
+            print "I don't know what that means"
+
+
+
 
 def swamp_room():
-    pass
+    instructions = """
+    This is the Swamp Room.
+    There is a door to the West.
+    There is a door to the East.
+    There is a door to the Southwest.
+    there is a door to the Southeast.
+    """
+    print instructions
+
+    while True:
+        choice = raw_input("> ").lower()
+        if "west" in choice and "south" in choice:
+            monkey_room()
+        elif "west" in choice:
+            heart_room()
+        elif "east" in choice and "south" in choice:
+            pit_room()
+        elif "east" in choice:
+            gargoyle_room()
+        elif "instructions" in choice:
+            print instructions
+        else:
+            print "I dont know what you're talking about"
+
+
+
+
 
 def monkey_room():
-    pass
+    instructions = """
+    This is the Monkey Room.
+    There is a door to the North.
+    There is a door to the South.
+    """
+    print instructions
+
+    while True:
+        choice = raw_input("> ").lower()
+        if "north" in choice:
+            swamp_room()
+        elif "south" in choice:
+            gold_room()
+        elif "instructions" in choice:
+            print instructions
+        else:
+            print "I don't know what that means"
 
 def pit_room(): 
-    print "As you enter, the door reads 'Pit of Dispair'."
-    print "The door swiftly closes behind you. It appears you are trapped"
-    print "Looking up, you see two platforms to your left and right."
-    print """
+    instructions = """
+    As you enter, the door reads 'Pit of Dispair'.
+    The door swiftly closes behind you. It appears you are trapped.
+    Looking up, you see two platforms to your left and right.
+    
     Protruding from the walls you see that there is a way up.
     Rocks embedded in the walls, vines, and small gaps where other unsuccessful
     adventurers have attempted to escape are all visible.
     """
-
-    # Define switches at top of pit
-    left_switch = False
-    right_switch = False
-
-    #  Turns out the Timer() function isn't very useful for a game.
-    # def platform_crumble():
-    #     exit("The platform crumbles beneath you and you fall to your death.")
-
-    # define platform crash function so I don't have to write out the code twice.
-    def platform_crash():
-        crash = 0
-        print "The platfrom begins to shake under you"
-        while crash < 16:
-            sleep(1)
-            if crash % 5 == 0:
-                print "Oh no! only %d seconds left!" % crash
-            else:
-                crash =+ 1
+    print instructions
 
 
 
-# loop until left_switch and right_switch are True
-    while left_switch or right_switch = False:
-        choice = raw_input("> ")
-        # create mechanism to activate switch
-        if "climb" and "left" in choice:
-            print "You scale the wall to your left, reaching the platform."
-            print "It doesn't seem very sturdy"
-            print "You see a switch in the wall! Do you activate it?"
-            activate_switch = raw_input("> ")
-            if "activate" or "push" or "press" in activate_switch:
-                Thread(target = get_input).start()
-                Thread(target = platform_crash).start()
 
 
                     
