@@ -15,19 +15,46 @@ def gold_room():
     print "Man, learn how to type a number!" then calls the gold_room()
     function to restart it. 
     '''
-    print "This room is full of gold. How much do you take?"
 
-    choice = raw_input("> ") 
-    try:
-        if re.match('[0-9]', choice) and int(choice) < 50: 
-            dead("Nice, you're not greedy, you win!")
-        elif int(choice) >= 50:
-            dead("You greedy bastard!")
-    except ValueError:
-        print "Man, learn how to type a number!"
-        print
-        print
-        gold_room()
+    instructions = """
+    This room is full of gold.
+    There is a door to the Northwest and a door to the Norteast.
+    """
+    print instructions
+
+
+    while True:
+        choice = raw_input("> ") 
+        if "take" in choice:
+            try:
+                # take input and run the split() method to get a list
+                goldnum = raw_input("How much gold do you take? > ").split()
+
+                # iterate over list, test slice to see if it's a digit
+                # and then if it's < 50
+                for num in goldnum:
+                    if num.isdigit() == True and int(num) < 50:
+                        dead("Nice, you're not greedy, you win!")
+                    elif num.isdigit() == True and int(num) >= 50:
+                        dead("You greedy bastard!")
+                    elif num.isdigit() == False:
+                        pass
+            # With the current implementation, you can't hit a value error and
+            # if no number is typed the loop ends and you are taken back to line 26
+            # for the while loop....            
+            except ValueError:
+                print "Man, learn how to type a number!"
+                print
+
+        elif "north" in choice and "west" in choice:
+            monkey_room()
+        elif "north" in choice and "east" in choice:
+            pit_room()
+        elif "instructions" in choice:
+            print instructions
+        else:
+            print "I don't know what that means."
+
 
 
 def bear_room():
@@ -74,59 +101,83 @@ def bear_room():
 
 
 def cthulu_room():
-    print "Here you see the great evil Cthulhu."
-    print "He, it, whatever stares at you and you go insane."
-    print "Do you flee for your life or eat your head? Or maybe something more brave?"
+
+    instructions = """
+        Here you see the great evil Cthulhu.
+        He, it, whatever stares at you and you go insane.
+        Do you flee for your life to the West or eat your head? Or maybe something more brave?
+        """
+    print instructions
 
     tries = 0
-    choice = raw_input("> ")
 
-    if "flee" in choice:
-        start()
-    elif "head" in choice:
-        dead("Well that was tasty.")
-    elif "brave" or "fight" in choice:
-        print "You decide to fight the insanity. Cthulu values your bravery."
-        print 'Cthulu bellows, "Mortal... Why have you decided to fight?"'
-        bellows = ['Resistance', 'Is', 'Fuetile']
-        for i in bellows:
-            print "%s..." % i
-        while tries < 11:
-            if tries == 0:   
-                print "Your vision begins to blur and goes dark."
-                print "You hear in the distance a familiar bellow:"
-                print "Mortal... completing this task will prove your sanity in the face of a god..."
-                print "ENTERRRRRRRRRRRR"
-                cthulu_mind_test()
-                tries =+ 1
-            elif 1 <= tries <= 10:
-                print "You may try again. Beware, these are not unlimited..."
-                print 10 - tries, "tries left"
-                cthulu_mind_test()
-                tries =+ 1
-            else:
-                print 
-                dead("You go insane and flee into the deepest depths of your mind!")
-    else:
-        cthulu_room()
+    while True:
+
+        choice = raw_input("> ")
+
+        if "flee" in choice:
+            start()
+        elif "head" in choice:
+            dead("Well that was tasty.")
+        elif "brave" or "fight" in choice:
+            print "You decide to fight the insanity. Cthulu values your bravery."
+            print 'Cthulu bellows, "Mortal... Why have you decided to fight?"'
+            bellows = ['Resistance', 'Is', 'Fuetile']
+            for i in bellows:
+                print "%s..." % i
+            while tries < 11:
+                if tries == 0:   
+                    print "Your vision begins to blur and goes dark."
+                    print "You hear in the distance a familiar bellow:"
+                    print "Mortal... completing this task will prove your sanity in the face of a god..."
+                    print "ENTERRRRRRRRRRRR"
+                    cthulu_mind_test()
+                    tries =+ 1
+                elif 1 <= tries <= 10:
+                    print "You may try again. Beware, these are not unlimited..."
+                    print 10 - tries, "tries left"
+                    cthulu_mind_test()
+                    tries =+ 1
+                else:
+                    print 
+                    dead("You go insane and flee into the deepest depths of your mind!")
+        elif "instructions" in choice:
+            print instructions
+        elif "west" in choice:
+            start()
+        else:
+            print "I don't know what you're talking about."
 
 def cthulu_mind_test(): # this really should be its own function - complete
     print "Suddenly arcane rune symbols enter your field of vision"
     print "You recognize them! Arithmitic..."
     print "You then hear a deep echo:"
     print "What is EIGHT to the power of TWO?!!"
-    choice = int(raw_input("> "))
+
+    test_passed = False
 
     try:
-        if choice == 64:
-            print "Ahhh, the force is strong with you..."
-            gold_room()
-#                cthulu_mind_test2()
-        else:
-            print "AH HA! You are no match for the INSANITY!"
-            print
-            print
-            cthulu_room()
+        while True:
+            choice = raw_input("> ")
+            if int(choice) == 64:
+                test_passed = True
+                print "Ahhh, the force is strong with you..."
+                print "A door appears to the south"
+                while True:
+                    choice2 = raw_input("> ").lower()
+                    if "south" in choice2:
+                        gargoyle_room()
+                    elif "west" in choice2:
+                        start()
+                    else:
+                        print """
+                        Cthulu is pleased with your resilience.
+                        You see a new door to the South and a door to the West
+                        """
+            else:
+                print "AH HA! You are no match for the INSANITY!"
+                print
+                print
     except ValueError:
         print "You're uttering gibberish, a sign of INSANITY!"
         print
@@ -155,11 +206,26 @@ def start():
 
 
 def gargoyle_room():
-    print "You enter the room and see three gargoyles staring back at you.."
-    print "You see that each gargyole is inscribed with a symbol on it's base"
-    print "They read, 'Omnia', 'Amor', 'Vincit'"
-    print "A button below each gargoyle appears to be present." 
-    pass
+    instructions = """
+        You enter the room and see three gargoyles staring back at you..
+        You see that each gargyole is inscribed with a symbol on it's base
+        They read, 'Omnia', 'Amor', 'Vincit'
+        A button below each gargoyle appears to be present.
+        There is a door to the North and a door to the West  
+        """
+    print instructions
+
+    while True:
+        choice = raw_input("> ").lower()
+        if "north" in choice:
+            cthulu_room()
+        elif "west" in choice:
+            swamp_room()
+        elif "instructions" in choice:
+            print instructions
+        else:
+            print "I don't know what you're talking about"
+
 
 
 def heart_room():
@@ -211,7 +277,6 @@ def swamp_room():
 
 
 
-
 def monkey_room():
     instructions = """
     This is the Monkey Room.
@@ -240,15 +305,20 @@ def pit_room():
     Protruding from the walls you see that there is a way up.
     Rocks embedded in the walls, vines, and small gaps where other unsuccessful
     adventurers have attempted to escape are all visible.
+
+    There is a door to the North.
+    There is a door to the Southwest.
     """
     print instructions
 
+    while True:
+        
+        choice = raw_input("> ").lower()
 
-
-
-
-                    
-
+        if "north" in choice:
+            swamp_room()
+        elif "south" in choice and "west" in choice:
+            gold_room()
 
 
 
