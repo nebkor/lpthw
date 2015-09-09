@@ -17,6 +17,6 @@ print "Let's do some things with stuff."
 
 print stuff[1]
 print stuff[-1]
-print stuff.pop()
-print ' '.join(stuff) # stuff is now one item shorter
+print stuff.pop() # stuff is now one item shorter
+print ' '.join(stuff)
 print '#'.join(stuff[3:5])
