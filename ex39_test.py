@@ -52,3 +52,7 @@ if not state:
 # can you do this on one line?
 city = hashmap.get(cities, 'TX', 'Does Not Exist')
 print "The city for the state 'TX' is: %s" % city
+
+# in one line
+print "The city for the state '{state}' is: {city}".format(
+    state='TX', city=hashmap.get(cities, state, 'Does Not Exist'))
