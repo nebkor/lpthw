@@ -38,26 +38,13 @@ def get_slot(aMap, key, default=None):
     # a list with two values or None.
     bucket = get_bucket(aMap, key)
 
-    # "enumerate" the data in the supplied bucket of the specified aMap
-    # What is this 0???
-    # >>> for i, kv in enumerate(bucket):
-    # ...     k, v = kv
-    # ...     print k, v
-    # ...
-    # SomeCity MO
-    # >>> print i
-    # 0
-    # >>> for k, v in enumerate(bucket):
-    # ...     print k, v
-    # ...
-    # 0 ('SomeCity', 'MO')
-
-    # unpack bucket and assign i to whatever 0 means and kv to the tuple
-    # returned by the enumerate() function on the bucket specified by the key
+    # unpack bucket and assign i to the index of the bucket and kv to the tuple
+    # returned at each step when enumerate() is called on the bucket
     for i, kv in enumerate(bucket):
         # assign k, v to the key and value in the tuple returned by the
         # enumerate function
         k, v = kv
+        print i, k, v
         if key == k: #if key provided matches the key pulled from the bucket
             return i, k, v # return i(what is this?), key and value
 
@@ -121,5 +108,7 @@ def format_list(aMap):
 # not sure why the study drill has you create this function when
 # print aMap is exactly the same thing?
 def dump(aMap):
-    for _ in aMap:
-        print _,
+    '''Print the contents of all buckets, along with their bucket number'''
+    for i, bucket in enumerate(aMap):
+        if bucket:
+            print i, bucket
